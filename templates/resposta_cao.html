@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETMATCH - Resposta Cão</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #fefaf1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #d6956d;
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: #3e3e3e;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #3e3e3e;
+            font-weight: bold;
+        }
+
+        .resposta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 90px;
+            width: 100%;
+        }
+
+        .resposta-card {
+            background-color: #fbfbfb;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .resposta-card h2 {
+            font-size: 22px;
+            font-weight: bold;
+            color: #3e3e3e;
+            margin-bottom: 15px;
+        }
+
+        .resposta-card p {
+            font-size: 16px;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+        a{
+            text-decoration: none;
+            color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>PETMATCH</h1>
+        <p>FORMULÁRIO</p>
+    </header>
+
+    <main>
+        <section class="resposta-container">
+            <div class="resposta-card">
+                <h2>O animal perfeito para você</h2>
+                <p>
+                    CACHORRO
+                <p>
+                    um cachorro pode ser o companheiro ideal para você! Eles são leais, carinhosos e máquinas de estar perto de seus tutores. Além disso, os cães se adaptam bem a diferentes estilos de vida, seja para quem gosta de passear e brincar ao ar livre ou para quem prefere momento
+
+                    Ter um cachorro é uma experiência </p>
+                <p>De acordo com suas respostas</p>
+                <p><a href="{{ url_for('adotante') }}">Voltar</a></p>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

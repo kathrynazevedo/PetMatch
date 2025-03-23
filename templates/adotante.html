@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf8ed;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #d19b6a;
+            padding: 15px 30px;
+            color: rgb(71, 71, 64);
+            font-size: 20px;
+            text-align: center;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: rgb(71, 71, 64);
+            font-size: 16px;
+            position: relative;
+        }
+        .profile-info {
+            display: none;
+            position: absolute;
+            background-color: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            top: 30px;
+            right: 0;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+        .nav-links a:hover .profile-info {
+            display: block;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: rgb(82, 61, 49);
+            margin-top: 20px;
+        }
+
+        .container {
+            display: flex;
+            margin-left: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .txt {
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        .card {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 300px;
+            background-color: #fff;
+            margin-left: 15px;
+            justify-content: space-between;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card p {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .card img {
+            margin-top: 5px;
+        }
+
+        .disponivel {
+            margin-bottom: 10px;
+            font-size: 15px;
+            border: none;
+            width: 200px;
+            height: 30px;
+            background-color: #45a049;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .adotado {
+            background-color: red;
+            color: white;
+            cursor: not-allowed;
+        }
+
+        #boxConfirma {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .confirmationButton {
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .confirmationButton:hover {
+            background-color: #ddd;
+        }
+
+        #boxConfirma {
+            display: none;
+            position: fixed; 
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            background-color: rgba(0, 0, 0, 0.7); 
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            z-index: 9999; 
+        }
+
+        #boxConfirma button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #boxConfirma button:hover {
+            background-color: #d32f2f;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>PETMATCH</h1>
+        <div class="nav-links">
+            <a href="{{ url_for('formulario') }}">FORMULÁRIO</a>
+            <a href="#">PERFIL 
+                <div class="profile-info">
+                    <p>Nome: {{ nome }}</p> 
+                    <p>Email: {{ email }}</p>
+                    <p>Perfil: {{role}}</p>
+                </div>
+            </a>
+            <a href="{{ url_for('logout') }}">SAIR</a>
+        </div>
+    </div>
+
+    <br>
+    <p class="txt">Eles esperam por você! Adote um amigo para a vida toda.</p>
+    <div class="container">
+        {% for animal in animais %}
+            <div class="card">
+                <img src="{{ animal.imagem }}" alt="{{ animal.nome }}" width="130">
+                <h3>{{ animal.nome }}</h3>
+                <p>{{ animal.descricao }}</p>
+                <p>Vacinado? {{animal.vacinacao}}</p>
+                <p>Localização: {{ animal.localizacao }}</p>
+                <button id="disponivel_{{ animal.id }}" class="disponivel" onclick="confirma('{{ animal.id }}')" {% if animal.status == 'Adotado' %} disabled style="background-color: red;" {% endif %}>
+                    {{ animal.status }}
+                </button>                
+            </div>
+        {% endfor %}
+    </div>
+    <div id="boxConfirma" style="display:none;">
+        <p>Deseja adotar ?</p>
+        <button id="confirmationButton" onclick="adotarPet()">Sim</button>
+        <button id="cancelar" onclick="closeConfirma()">Não</button>
+    </div>
+    <div class="footer">
+        <p>Os animais apresentados nesse projeto estão para adoção no site: <a href="http://amigonaosecompra.com.br" target="_blank">amigonaosecompra.com.br</a></p>
+    </div>
+
+    <script>
+        let petId = null;
+
+        function confirma(id) {
+            document.getElementById("boxConfirma").style.display = "block";
+            document.getElementById("confirmationButton").setAttribute("onclick", "adotarPet(" + id + ")");
+        }
+
+        function adotarPet(id) {
+            fetch('/adotar/' + id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'sucesso') {
+                var botao = document.getElementById("disponivel_" + id);
+                botao.innerText = "Adotado";  
+                botao.style.backgroundColor = "red";  
+                botao.disabled = true;  
+                document.getElementById("boxConfirma").style.display = "none";
+
+                alert(data.message); 
+                } else {
+                alert(data.message);  
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        }
+
+        function closeConfirma() {
+            document.getElementById("boxConfirma").style.display = "none";
+        }
+    </script>
+</body>
+</html>

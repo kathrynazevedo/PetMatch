@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETMATCH - Resultado Gato</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background-color: #fefaf1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .header {
+            background-color: #d6956d;
+            padding: 20px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 32px;
+            color: #3e3e3e;
+            font-weight: bold;
+        }
+        .header p {
+            font-size: 18px;
+            color: #3e3e3e;
+            font-weight: bold;
+        }
+        .result-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 90px;
+            width: 100%;
+        }
+        .result-card {
+            background-color: #fbfbfb;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+        }
+        .result-card h2 {
+            font-size: 22px;
+            font-weight: bold;
+            color: #3e3e3e;
+        }
+        .result-card p {
+            font-size: 16px;
+            color: #666;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+        a{
+            text-decoration: none;
+            color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>PETMATCH</h1>
+        <p>FORMULÁRIO</p>
+    </header>
+
+    <main>
+        <section class="result-container">
+            <div class="result-card">
+                <h2>O animal perfeito para você</h2>
+                <p>
+                    GATO<br>
+                    Os gatos são independentes, adaptam-se bem a diferentes ambientes, incluindo apartamentos, e não demandam muitos cuidados durante o dia. Eles são companheiros tranquilos, perfeitos para quem busca um pet de fácil adaptação e comportamento mais reservado.<br><br>
+                    De acordo com suas respostas.
+                </p>
+                <p><a href="{{ url_for('adotante') }}">Voltar</a></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

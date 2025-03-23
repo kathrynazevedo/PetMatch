@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETMATCH - Formulário</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #fefaf1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #d6956d;
+            padding: 20px 30px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: #3e3e3e;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #3e3e3e;
+            font-weight: bold;
+        }
+
+        .formulario-container {
+            margin-top: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .formulario-card {
+            background-color: #fbfbfb;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .formulario-card h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3e3e3e;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .question p {
+            font-size: 16px;
+            color: #3e3e3e;
+            margin-bottom: 10px;
+        }
+
+        label {
+            margin-right: 15px;
+            font-size: 15px;
+            color: #3e3e3e;
+        }
+
+        .submit-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #d6956d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: #c4845e;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>PETMATCH</h1>
+        <p>FORMULÁRIO</p>
+    </header>
+
+    <main>
+        <section class="formulario-container">
+            <div class="formulario-card">
+                <h2>O animal perfeito para você</h2>
+                <form id="pet-form">
+                    <div class="question">
+                        <p>Você mora em apartamento ou casa?</p>
+                        <label><input type="radio" name="moradia" value="apartamento" required> Apartamento</label>
+                        <label><input type="radio" name="moradia" value="casa"> Casa</label>
+                    </div>
+
+                    <div class="question">
+                        <p>Você prefere um animal mais independente?</p>
+                        <label><input type="radio" name="independente" value="sim" required> Sim</label>
+                        <label><input type="radio" name="independente" value="nao"> Não</label>
+                    </div>
+
+                    <div class="question">
+                        <p>Você tem muito tempo livre para passeios?</p>
+                        <label><input type="radio" name="tempo" value="sim" required> Sim</label>
+                        <label><input type="radio" name="tempo" value="nao"> Não</label>
+                    </div>
+
+                    <div class="question">
+                        <p>Você prefere animais silenciosos?</p>
+                        <label><input type="radio" name="silencioso" value="sim" required> Sim</label>
+                        <label><input type="radio" name="silencioso" value="nao"> Não</label>
+                    </div>
+
+                    <button type="submit" class="submit-button">Enviar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('pet-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const independente = document.querySelector('input[name="independente"]:checked').value;
+            const tempo = document.querySelector('input[name="tempo"]:checked').value;
+            if (independente === "sim" && tempo === "nao") {
+                window.location.href = "{{ url_for('respostaGato') }}";
+            } else {
+                window.location.href = "{{ url_for('respostaCao') }}";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Concluído</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5ecdc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            align-items: center;
+            gap: 20px;
+        }
+        img {
+            width: 280px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .message {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        h2 {
+            font-size: 24px;
+            color: black;
+        }
+        p {
+            font-size: 16px;
+            color: black;
+        }
+        a {
+            color: #45a049;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='cachorrosorrindo.png') }}" alt="Cachorro sorrindo">
+        <div class="message">
+            <h2>Parabéns!</h2>
+            <p>Seu cadastro foi finalizado</p>
+            <p>Agora volte para a aba <a href="{{ url_for('index') }}">LOGIN</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

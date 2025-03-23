@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - PETMATCH</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fdf8ed;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            color: #444;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-cadastrar {
+            width: 100%;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+</style>
+</head>
+<body>
+
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>CADASTRO</h1>
+        <form id="formCadastro">
+            <input type="text" id="nome" placeholder="Nome Completo" required>
+            
+            <input type="text" id="cpf" placeholder="CPF (apenas números)" required maxlength="11">
+            <p class="erro" id="erroCPF"></p>
+
+            <input type="date" id="dataNascimento" required>
+            <p class="erro" id="erroData"></p>
+
+            <input type="tel" id="telefone" placeholder="Telefone (apenas números)" required maxlength="11">
+            <p class="erro" id="erroTelefone"></p>
+
+            <input type="text" id="endereco" placeholder="Endereço" required>
+            <input type="email" id="email" placeholder="E-mail" required>
+            <input type="password" id="senha" placeholder="Senha" required>
+            
+            <button type="submit" class="btn-cadastrar">entrar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("formCadastro").addEventListener("submit", function(event) {
+            event.preventDefault(); // Impede o envio do formulário padrão
+            
+            let valido = true;
+            let erroCPF = document.getElementById("erroCPF");
+            let erroData = document.getElementById("erroData");
+            let erroTelefone = document.getElementById("erroTelefone");
+
+            erroCPF.textContent = "";
+            erroData.textContent = "";
+            erroTelefone.textContent = "";
+
+            let cpf = document.getElementById("cpf").value;
+            let dataNascimento = document.getElementById("dataNascimento").value;
+            let telefone = document.getElementById("telefone").value;
+
+            // Validação CPF (apenas números e 11 dígitos)
+            if (!/^\d{11}$/.test(cpf)) {
+                erroCPF.textContent = "O CPF deve ter exatamente 11 números.";
+                valido = false;
+            }
+
+            // Validação Telefone (apenas números e 11 dígitos)
+            if (!/^\d{11}$/.test(telefone)) {
+                erroTelefone.textContent = "O telefone deve ter exatamente 11 números.";
+                valido = false;
+            }
+
+            // Validação Data de Nascimento (Maior de 18 anos)
+            let dataNasc = new Date(dataNascimento);
+            let hoje = new Date();
+            let idade = hoje.getFullYear() - dataNasc.getFullYear();
+            let mes = hoje.getMonth() - dataNasc.getMonth();
+            if (mes < 0 || (mes === 0 && hoje.getDate() < dataNasc.getDate())) {
+                idade--;
+            }
+
+            if (idade < 18) {
+                erroData.textContent = "Você deve ser maior de idade para se cadastrar.";
+                valido = false;
+            }
+
+            // Se todos os dados forem válidos, redireciona para mensagem.html
+            if (valido) {
+                window.location.href = "mensagem.html";
+            }
+        });
+    </script>
+
+</body>
+</html>

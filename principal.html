@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETMATCH - Adotante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf8ed;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #d19b6a;
+            padding: 15px 30px;
+            color: rgb(71, 71, 64);
+            font-size: 20px;
+        }
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .search-container input {
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+        .search-container .search-icon {
+            position: absolute;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: rgb(71, 71, 64);
+            font-size: 16px;
+            position: relative;
+        }
+        .profile-info {
+            display: none;
+            position: absolute;
+            background-color: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            top: 30px;
+            right: 0;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+        .nav-links a:hover .profile-info {
+            display: block;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .pet-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+        }
+        .pet-card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .adoption-button {
+            background-color: #4caf50;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal, .tutor-info, .overlay {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            text-align: center;
+        }
+        .overlay {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .modal.active, .tutor-info.active, .overlay.active {
+            display: block;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: rgb(82, 61, 49);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="search-container">
+            <input type="text" placeholder="Buscar...">
+            <img src="https://cdn-icons-png.flaticon.com/512/2703/2703343.png" alt="Lupa" class="search-icon">
+        </div>
+        <h1>PETMATCH</h1>
+        <div class="nav-links">
+            <a href="formulario/formulario.html">FORMULÁRIO</a>
+            <a href="#">PERFIL 
+                <div class="profile-info">
+                    <p>Nome: João Silva</p>  <!--CONEXÃO COM O BANCO DE DADOS AQ-->
+                    <p>Email: joao@email.com</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="container" id="petsContainer"></div>
+    <div class="overlay" id="overlay"></div>
+    <div class="modal" id="confirmModal">
+        <p>Deseja adotar esse pet?</p>
+        <button class="btn-sim" onclick="showTutorInfo()">Sim</button>
+        <button class="btn-nao" onclick="closeModal()">Não</button>
+    </div>
+    <div class="tutor-info" id="tutorInfo">  <!--CONEXÃO COM O BANCO DE DADOS AQ-->
+        <h2>Informações do Tutor Temporário</h2>
+        <p>Nome: João Silva</p>
+        <p>Telefone: (11) 91234-5678</p>
+        <p>Email: joao.silva@email.com</p>
+        <button onclick="closeTutorInfo()">Fechar</button>
+    </div>
+    <div class="footer">
+        <p>Os animais apresentados nesse projeto estão para adoção no site: <a href="http://amigonaosecompra.com.br" target="_blank">amigonaosecompra.com.br</a></p>
+    </div>
+    <script>
+        const pets = [
+    { 
+        nome: "Raiza", 
+        imagem: "https://images.amigonaosecompra.com.br/unsafe/0x0/753c0df8-b45e-46fc-95ea-cd318a75462e/73b555fa-2e7f-46a7-b4cd-8067ed5644d8/73b555fa-2e7f-46a7-b4cd-8067ed5644d8.jpg?v=63909102544",
+        info: "Cachorro | Fêmea | Adulto | Porte médio",
+        raca: "Vira-lata",
+        vacinacao: "Vacinada",
+        localizacao: "São Paulo, SP"
+    },
+    { 
+        nome: "Athena", 
+        imagem: "https://images.amigonaosecompra.com.br/unsafe/0x0/b3093993-80d1-4014-b70c-ace5471c4fd6/e58797e8-e1d9-4b88-9fe4-8c9d1f59aab9/e58797e8-e1d9-4b88-9fe4-8c9d1f59aab9.jpeg?v=63909113655",
+        info: "Cachorro | Fêmea | Adulto | Porte pequeno",
+        raca: "Poodle",
+        vacinacao: "Vacinada",
+        localizacao: "Rio de Janeiro, RJ"
+    },
+    { 
+        nome: "Pingo", 
+        imagem: "https://images.amigonaosecompra.com.br/unsafe/0x0/b3093993-80d1-4014-b70c-ace5471c4fd6/7ec27990-8b51-4acc-a5c2-4da5f4f38350/7ec27990-8b51-4acc-a5c2-4da5f4f38350.jpeg?v=63907938386",
+        info: "Gato | Macho | Filhote | Porte pequeno",
+        raca: "Siamês",
+        vacinacao: "Não vacinado",
+        localizacao: "Belo Horizonte, MG"
+    },
+    { 
+        nome: "Doritos", 
+            imagem: "https://images.amigonaosecompra.com.br/unsafe/0x0/86f45627-25db-49a8-8119-7bd68511e3f3/383f3d3e-7796-4da4-abf3-be36fcb5ed05/383f3d3e-7796-4da4-abf3-be36fcb5ed05.jpg?v=63909050126", 
+            info: "Cachorro | Macho | Filhote | Porte médio",
+            vacinacao: "Vacinado e castrado", 
+            localizacao: "Curitiba - PR"
+    },
+            { 
+            nome: "Sophie", 
+            imagem: "https://images.amigonaosecompra.com.br/unsafe/0x0/86f45627-25db-49a8-8119-7bd68511e3f3/999c75bc-4c2a-4213-8711-01bb27ad1cdd/999c75bc-4c2a-4213-8711-01bb27ad1cdd.jpg?v=63908871152", 
+            info: "Gato | Fêmea | Adulto | Porte médio",
+            vacinacao: "Vacinada e castrada", 
+            localizacao: "Porto Alegre - RS" 
+            }
+        
+        ];
+        
+        const petsContainer = document.getElementById("petsContainer");
+        pets.forEach(pet => {
+            let petCard = document.createElement("div");
+            petCard.classList.add("pet-card");
+            petCard.innerHTML = `
+                <img src="${pet.imagem}" alt="${pet.nome}">
+                <h3>${pet.nome}</h3>
+                <p class="adoption-info">${pet.info}</p>
+                <button class="adoption-button" onclick="showModal()">DISPONÍVEL</button>
+            `;
+            petsContainer.appendChild(petCard);
+        });
+        function showModal() {
+            document.getElementById("confirmModal").classList.add("active");
+            document.getElementById("overlay").classList.add("active");
+        }
+        function closeModal() {
+            document.getElementById("confirmModal").classList.remove("active");
+            document.getElementById("overlay").classList.remove("active");
+        }
+        function showTutorInfo() {
+            closeModal();
+            document.getElementById("tutorInfo").classList.add("active");
+        }
+        function closeTutorInfo() {
+            document.getElementById("tutorInfo").classList.remove("active");
+        }
+    </script>
+</body>
+</html>

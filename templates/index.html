@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PETMATCH</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #fdf8ed;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .image-container {
+            flex: 1;
+            background-image: url('https://thumbs.dreamstime.com/b/foto-vertical-de-um-menino-e-cachorro-brincando-no-quintal-da-casa-o-est%C3%A3o-muito-felizes-em-brincar-juntos-252629992.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px 0 0 10px;
+        }
+        .form-container {
+            flex: 1;
+            text-align: center;
+            padding: 40px;
+        }
+        .form-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-button {
+            width: 100%;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        a{
+            color: #45a049;
+            text-decoration: none;
+        }
+        .mensagem{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container"></div>
+        <div class="form-container">
+            <h1>Bem-vindo ao PETMATCH</h1>
+            <h2>Login</h2>
+            <form action="" method="post">
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="password" name="senha" id="senha" placeholder="Senha" required>
+                <button type="submit" class="login-button">Entrar</button>
+                
+                {% set mensagens = get_flashed_messages() %}
+                {% if mensagens %}
+                    <div class="mensagem"><br>
+                        {% for msg in mensagens %}
+                            {{ msg }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <p>Não tem uma conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

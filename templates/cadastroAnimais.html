@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styleCadUsuario.css">
+    <title>Cadastro Animais - PETMATCH</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5ecdc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            flex-direction: column;
+        }       
+        .pcad {
+            font-size: 2em;
+            margin-top: 5px;
+            color: #444;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 120px;
+            width: 750px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-weight: bold;
+        }
+        .role-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        #nome{
+            width: 90%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #descricao{
+            width: 86%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #imagem{
+            width: 88%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #localizacao{
+            width: 85%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-cadastrar {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 49%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-cadastrar:hover {
+            background-color: #45a049;
+        }
+
+        .btn-cancelar {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 49%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-cancelar:hover {
+            background-color: #45a049;
+        }
+
+        a{
+            text-decoration: none;
+            color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="pcad">Cadastro Animais</p>
+    <form id="cadastroForm" method="POST" action="" enctype="multipart/form-data">
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="imagem">Imagem:</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" required><br><br>
+
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" placeholder="Idade, características e porte"><br><br>
+
+        <p>Vacinado?</p>
+        <label><input type="radio" name="role" value="sim" id="sim"> Sim</label>
+        <label><input type="radio" name="role" value="nao" id="nao"> Não</label><br><br>
+
+        <label for="localizacao">Localização:</label>
+        <input type="text" id="localizacao" name="localizacao" required><br><br>
+            
+        <button type="reset" class="btn-cancelar">Cancelar</button>
+        <button type="submit" class="btn-cadastrar">Cadastrar</button>
+        </p>
+        </form>
+    </div>
+</body>
+</html>
