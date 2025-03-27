@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5ecdc;
+            background-color: #ddfdcc; /* Cor de fundo principal */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -41,55 +41,22 @@
             margin-bottom: 15px;
         }
 
-        #nome{
+        input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="date"] {
             width: 90%;
             padding: 5px;
             margin: 5px 0;
-            border: 1px solid #ccc;
+            border: 1px solid #6FCF40; /* Borda em tom harmonioso */
             border-radius: 5px;
+            background-color: #fdfdfd; /* Fundo do input */
+            color: rgb(196, 32, 32); /* Texto branco para melhor visibilidade */
         }
 
-        #cpf{
-            width: 91.5%;
-            padding: 5px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        input::placeholder {
+            color: white; /* Mantém o placeholder legível */
+            opacity: 0.8;
         }
 
-        #endereco{
-            width: 87%;
-            padding: 5px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }   
-
-        #dataNascimento{
-            width: 77%;
-            padding: 5px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input[type="email"], input[type="password"] {
-            width: 90%;
-            padding: 5px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input[type="tel"]{
-            width: 88%;
-            padding: 5px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .btn-cadastrar {
+        .btn-cadastrar, .btn-cancelar {
             background-color: #4CAF50;
             color: white;
             padding: 10px;
@@ -99,27 +66,13 @@
             cursor: pointer;
             font-size: 16px;
         }
-        .btn-cadastrar:hover {
+        .btn-cadastrar:hover, .btn-cancelar:hover {
             background-color: #45a049;
         }
 
-        .btn-cancelar {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            width: 49%;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .btn-cancelar:hover {
-            background-color: #45a049;
-        }
-
-        a{
+        a {
             text-decoration: none;
-            color: #45a049;
+            color: #4a86e0; /* Cor do link para harmonizar */
         }
     </style>
 </head>
