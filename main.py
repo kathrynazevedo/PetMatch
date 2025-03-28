@@ -112,15 +112,29 @@ def adotar(animal_id):
 def formulario():
     return render_template('formulario.html')
 
-@app.route('/respostaCao')
+@app.route('/resposta_gato_adulto')
 @login_required
-def respostaCao():
-    return render_template('resposta_cao.html')
+def resposta_gato_adulto():
+    return render_template('resposta_gato_adulto.html')
 
-@app.route('/respostaGato')
+@app.route('/resposta_gato_filhote')
+def resposta_gato_filhote():
+    return render_template('resposta_gato_filhote.html')
+
+@app.route('/resposta_cao_pequeno')
 @login_required
-def respostaGato():
-    return render_template('resposta_gato.html')
+def resposta_cao_pequeno():
+    return render_template('resposta_cao_pequeno.html')
+
+@app.route('/resposta_cao_medio')
+@login_required
+def resposta_cao_medio():
+    return render_template('resposta_cao_medio.html')
+
+@app.route('/resposta_cao_grande')
+@login_required
+def resposta_cao_grande():
+    return render_template('resposta_cao_grande.html')
 
 @app.route('/cadastroFinalizado')
 def cadastroFinalizado():

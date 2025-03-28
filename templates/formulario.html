@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #fefaf1;
+            background-color: #ddfdcc;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -22,7 +22,7 @@
         }
 
         .header {
-            background-color: #d6956d;
+            background-color: #4CAF50;
             padding: 20px 30px;
             text-align: center;
             width: 100%;
@@ -30,13 +30,13 @@
 
         .header h1 {
             font-size: 32px;
-            color: #3e3e3e;
+            color: white;
             font-weight: bold;
         }
 
         .header p {
             font-size: 18px;
-            color: #3e3e3e;
+            color: white;
             font-weight: bold;
         }
 
@@ -48,7 +48,7 @@
         }
 
         .formulario-card {
-            background-color: #fbfbfb;
+            background-color: white;
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -60,7 +60,7 @@
         .formulario-card h2 {
             font-size: 24px;
             font-weight: bold;
-            color: #3e3e3e;
+            color: #444;
             margin-bottom: 20px;
         }
 
@@ -71,20 +71,20 @@
 
         .question p {
             font-size: 16px;
-            color: #3e3e3e;
+            color: #444;
             margin-bottom: 10px;
         }
 
         label {
             margin-right: 15px;
             font-size: 15px;
-            color: #3e3e3e;
+            color: #444;
         }
 
         .submit-button {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #d6956d;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 8px;
@@ -93,7 +93,7 @@
         }
 
         .submit-button:hover {
-            background-color: #c4845e;
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -111,25 +111,33 @@
                     <div class="question">
                         <p>Você mora em apartamento ou casa?</p>
                         <label><input type="radio" name="moradia" value="apartamento" required> Apartamento</label>
-                        <label><input type="radio" name="moradia" value="casa"> Casa</label>
+                        <label><input type="radio" name="moradia" value="casa" required> Casa</label>
                     </div>
 
                     <div class="question">
-                        <p>Você prefere um animal mais independente?</p>
-                        <label><input type="radio" name="independente" value="sim" required> Sim</label>
-                        <label><input type="radio" name="independente" value="nao"> Não</label>
+                        <p>Sua moradia é grande, média ou pequena?</p>
+                        <label><input type="radio" name="tamanho" value="Grande" required> Grande</label>
+                        <label><input type="radio" name="tamanho" value="Media"required> Média</label>
+                        <label><input type="radio" name="tamanho" value="Pequena" required> Pequena</label>
                     </div>
 
                     <div class="question">
-                        <p>Você tem muito tempo livre para passeios?</p>
-                        <label><input type="radio" name="tempo" value="sim" required> Sim</label>
-                        <label><input type="radio" name="tempo" value="nao"> Não</label>
+                        <p>Tem outros animais de estimação?</p>
+                        <label><input type="radio" name="outros" value="gato" required> Tenho gato</label>
+                        <label><input type="radio" name="outros" value="cachorro" required> Tenho cachorro</label>
+                        <label><input type="radio" name="outros" value="nao" required> Não</label>
                     </div>
 
                     <div class="question">
-                        <p>Você prefere animais silenciosos?</p>
-                        <label><input type="radio" name="silencioso" value="sim" required> Sim</label>
-                        <label><input type="radio" name="silencioso" value="nao"> Não</label>
+                        <p>Você tem crianças pequenas em casa?</p>
+                        <label><input type="radio" name="criancas" value="sim" required> Sim</label>
+                        <label><input type="radio" name="criancas" value="nao" required> Não</label>
+                    </div>
+
+                    <div class="question">
+                        <p>Quanto tempo você passa fora de casa diariamente?</p>
+                        <label><input type="radio" name="tempo" value="pouco" required> Pouco tempo</label>
+                        <label><input type="radio" name="tempo" value="diaTodo" required> O dia todo</label>
                     </div>
 
                     <button type="submit" class="submit-button">Enviar</button>
@@ -140,15 +148,31 @@
 
     <script>
         document.getElementById('pet-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const independente = document.querySelector('input[name="independente"]:checked').value;
-            const tempo = document.querySelector('input[name="tempo"]:checked').value;
-            if (independente === "sim" && tempo === "nao") {
-                window.location.href = "{{ url_for('respostaGato') }}";
-            } else {
-                window.location.href = "{{ url_for('respostaCao') }}";
-            }
-        });
+    e.preventDefault();
+    
+    const criancas = document.querySelector('input[name="criancas"]:checked').value;
+    const tempo = document.querySelector('input[name="tempo"]:checked').value;
+    const outros = document.querySelector('input[name="outros"]:checked').value;
+    const moradia = document.querySelector('input[name="moradia"]:checked').value;
+
+    let destino = "";
+
+    if (criancas === "sim" && tempo === "pouco" && outros === "gato" && moradia === "apartamento") {
+        destino = "{{ url_for('resposta_gato_adulto') }}";
+    } else if (criancas === "nao" && tempo === "diaTodo" && outros === "nao" && moradia === "apartamento") {
+        destino = "{{ url_for('resposta_gato_filhote') }}";
+    } else if (criancas === "sim" && tempo === "diaTodo" && outros === "nao" && moradia === "apartamento") {
+        destino = "{{ url_for('resposta_cao_pequeno') }}";
+    } else if (criancas === "nao" && tempo === "pouco" && outros === "cachorro" && moradia === "casa") {
+        destino = "{{ url_for('resposta_cao_medio') }}";
+    } else if (criancas === "nao" && tempo === "diaTodo" && outros === "nao" && moradia === "casa")  {
+        destino = "{{ url_for('resposta_cao_grande') }}";
+    } else {
+        destino = "{{ url_for('resposta_cao_medio') }}";  // TODOS ESTÃO PEGANDO
+    }
+
+    window.location.href = destino;
+});
     </script>
 </body>
 </html>

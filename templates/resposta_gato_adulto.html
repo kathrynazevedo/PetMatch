@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PETMATCH - Resposta Cão</title>
+    <title>PETMATCH - Resultado Gato</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #fefaf1;
+            background-color: #d9d9d9;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -22,20 +22,21 @@
         }
 
         .header {
-            background-color: #d6956d;
+            background-color: #4CAF50;
             padding: 20px 30px;
             text-align: center;
+            width: 100%;
         }
 
         .header h1 {
             font-size: 32px;
-            color: #3e3e3e;
+            color: white;
             font-weight: bold;
         }
 
         .header p {
             font-size: 18px;
-            color: #3e3e3e;
+            color: white;
             font-weight: bold;
         }
 
@@ -49,7 +50,7 @@
         }
 
         .resposta-card {
-            background-color: #fbfbfb;
+            background-color: white;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -60,19 +61,20 @@
         .resposta-card h2 {
             font-size: 22px;
             font-weight: bold;
-            color: #3e3e3e;
+            color: #333;
             margin-bottom: 15px;
         }
 
         .resposta-card p {
             font-size: 16px;
-            color: #666;
+            color: #333;
             margin-top: 10px;
             line-height: 1.5;
         }
         a{
             text-decoration: none;
-            color: #45a049;
+            color: #4CAF50;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -88,16 +90,13 @@
             <div class="resposta-card">
                 <h2>O animal perfeito para você</h2>
                 <p>
-                    CACHORRO
-                <p>
-                    um cachorro pode ser o companheiro ideal para você! Eles são leais, carinhosos e máquinas de estar perto de seus tutores. Além disso, os cães se adaptam bem a diferentes estilos de vida, seja para quem gosta de passear e brincar ao ar livre ou para quem prefere momento
-
-                    Ter um cachorro é uma experiência </p>
-                <p>De acordo com suas respostas</p>
+                    GATO ADULTO<br>
+                    Os gatos são independentes, adaptam-se bem a diferentes ambientes, incluindo apartamentos, e não demandam muitos cuidados durante o dia. Eles são companheiros tranquilos, perfeitos para quem busca um pet de fácil adaptação e comportamento mais reservado.<br><br>
+                    De acordo com suas respostas.
+                </p>
                 <p><a href="{{ url_for('adotante') }}">Voltar</a></p>
             </div>
         </section>
     </main>
-
 </body>
 </html>
