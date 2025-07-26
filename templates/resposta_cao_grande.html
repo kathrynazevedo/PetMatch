@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETMATCH - Resposta Cão</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #d9d9d9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            padding: 20px 30px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .resposta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 90px;
+            width: 100%;
+        }
+
+        .resposta-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .resposta-card h2 {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .resposta-card p {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+        a{
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>PETMATCH</h1>
+        <p>FORMULÁRIO</p>
+    </header>
+
+    <main>
+        <section class="resposta-container">
+            <div class="resposta-card">
+                <h2>O animal perfeito para você</h2>
+                <p><strong>CACHORRO DE PORTE GRANDE</strong></p>
+                <p>
+                    Um cachorro grande pode ser o melhor amigo para você! Se você tem bastante espaço em casa e tempo para oferecer passeios e atividades, um cão grande será um ótimo companheiro. Eles são leais, brincalhões e gostam de interagir com seus tutores. Algumas raças que combinam com esse perfil são Labrador, Golden Retriever e Pastor Alemão. Com um grande amigo ao seu lado, os momentos juntos serão inesquecíveis!
+                </p>
+                <p>De acordo com suas respostas, um cachorro de porte grande seria a melhor escolha para você!</p>
+                <p><a href="{{ url_for('adotante') }}">Voltar</a></p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

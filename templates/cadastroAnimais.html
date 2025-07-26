@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styleCadUsuario.css">
+    <title>Cadastro Animais - PETMATCH</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ddfdcc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            flex-direction: column;
+        }       
+        .pcad {
+            font-size: 2em;
+            margin-top: 5px;
+            color: #444;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 30px;
+            width: 750px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-weight: bold;
+        }
+        input[type="text"], input[type="file"] {
+            width: 90%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #6FCF40;
+            border-radius: 5px;
+            background-color: #fdfdfd;
+        }
+        .btn-cadastrar, .btn-cancelar {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 49%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-cadastrar:hover, .btn-cancelar:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="pcad">Cadastro Animais</p>
+    <form id="cadastroForm" method="POST" action="" enctype="multipart/form-data">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="imagem">Imagem:</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" required><br><br>
+
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" placeholder="Tipo | características | adulto| e porte"><br><br>
+
+        <label for="tipo">Tipo do animal:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="cachorro">Cachorro</option>
+            <option value="gato">Gato</option>
+        </select><br><br>
+
+        <p>Vacinas:</p>
+        <div id="vacinas-container">
+            <label><input type="checkbox" name="vacina" value="V8/V10"> V8/V10</label>
+            <label><input type="checkbox" name="vacina" value="Raiva"> Raiva</label>
+            <label><input type="checkbox" name="vacina" value="Antirrábica"> Antirrábica</label>
+            <label id="gripe-canina"><input type="checkbox" name="vacina" value="Gripe Canina"> Gripe Canina</label>
+            <label id="felv" style="display: none;"><input type="checkbox" name="vacina" value="FeLV"> Vacina contra FeLV</label>
+            <label><input type="checkbox" name="vacina" value="Nenhuma"> Nenhuma</label>
+        </div><br>
+
+        <label for="localizacao">Localização:</label>
+        <input type="text" id="localizacao" name="localizacao" required><br><br>
+        
+        <button type="reset" class="btn-cancelar">Cancelar</button>
+        <button type="submit" class="btn-cadastrar">Cadastrar</button>
+    </form>
+    </div>
+
+    <script>
+        document.getElementById("tipo").addEventListener("change", function() {
+            let tipo = this.value;
+            let gripeCanina = document.getElementById("gripe-canina");
+            let felv = document.getElementById("felv");
+
+            if (tipo === "cachorro") {
+                gripeCanina.style.display = "inline";
+                felv.style.display = "none";
+            } else {
+                gripeCanina.style.display = "none";
+                felv.style.display = "inline";
+            }
+        });
+    </script>
+</body>
+</html>
